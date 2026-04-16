@@ -82,6 +82,37 @@ npx quasar build
 
 Os arquivos serão gerados em `dist/spa/`.
 
+## Execucao com Docker
+
+O frontend usa build com Quasar + servico Nginx em producao local.
+
+### Subir frontend em Docker
+
+```bash
+docker compose up --build -d
+```
+
+Aplicacao disponivel em:
+
+- `http://localhost:9000`
+
+### URL da API no Docker
+
+A URL da API e injetada no build por `build args`:
+
+- `VITE_API_URL`
+
+Exemplo (frontend e backend na mesma maquina):
+
+```bash
+VITE_API_URL=http://localhost:8000/api docker compose up --build -d
+```
+
+Importante:
+
+- Como o frontend e buildado, mudancas em `VITE_API_URL` exigem novo build (`docker compose up --build`).
+- O arquivo `.env` pode nao entrar no contexto de build dependendo do `.dockerignore`, entao prefira setar `VITE_API_URL` no comando acima quando usar Docker.
+
 ## Funcionalidades
 
 ### Autenticação JWT
@@ -123,3 +154,7 @@ A aplicação consome a API Laravel com as seguintes rotas:
 | POST   | `/api/logout`   |     Sim      | Logout                       |
 
 Base URL configurada via variável de ambiente `VITE_API_URL`.
+
+### Campos aceitos para autenticacao
+
+O backend aceita tanto `senha` quanto `password` no login e no cadastro.
