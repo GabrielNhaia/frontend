@@ -108,11 +108,6 @@ Exemplo (frontend e backend na mesma maquina):
 VITE_API_URL=http://localhost:8000/api docker compose up --build -d
 ```
 
-Importante:
-
-- Como o frontend e buildado, mudancas em `VITE_API_URL` exigem novo build (`docker compose up --build`).
-- O arquivo `.env` pode nao entrar no contexto de build dependendo do `.dockerignore`, entao prefira setar `VITE_API_URL` no comando acima quando usar Docker.
-
 ## Funcionalidades
 
 ### Autenticação JWT
